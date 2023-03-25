@@ -1,4 +1,4 @@
-package entities;
+package sb.escola.entities;
 
 import java.util.Date;
 
