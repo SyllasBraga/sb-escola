@@ -1,5 +1,5 @@
 # sb-escola
-Projeto está sendo realizado com a linguagem Java e o SGDB MySQL o sem auxílio de frameworks para praticar os seus conceitos fundamentais. 
+Projeto está sendo realizado com a linguagem Java e o MySQL sem o auxílio de frameworks para praticar os conceitos fundamentais destas tecnologias. 
 ## Java
 Conceitos de lógica de programação em geral: variáveis, if/else/else if, for, forech, while e switch. 
 ## Programação Orientada a Objetos
@@ -17,9 +17,9 @@ sub-tabelas, triggers, procedures e views.
 
 #### Requisitos para testar o projeto
 
-- Possuir a JDK 17
-- SGDB MySQL
-- Qualquer IDE
+- Possuir a JDK 17;
+- SGDB MySQL;
+- Qualquer IDE.
 
 ## Modelo Entidade Relacionamento
 
