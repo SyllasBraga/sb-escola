@@ -1,7 +1,9 @@
 package sb.escola.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Aluno extends Pessoa{
 
@@ -25,12 +27,15 @@ public class Aluno extends Pessoa{
 
     @Override
     public String toString() {
+        List<String> turmasString = new ArrayList<>();
+        turmas.forEach(x -> turmasString.add(x.getDisciplina()));
+
         return "Aluno{"+
                 "matricula=" + matricula +
                 ", nomeCompleto='" + nomeCompleto + '\'' +
                 ", dataMatricula=" + dataMatricula +
                 ", endereco='" + endereco + '\'' +
-                "turmas=" + turmas.toString() +
+                ", turmas=" + turmasString +
                 '}';
     }
 }
