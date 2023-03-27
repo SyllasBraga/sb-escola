@@ -1,6 +1,7 @@
 package sb.escola.repositories;
 
 import sb.escola.Configs.DataBaseConfig;
+import sb.escola.entities.Aluno;
 import sb.escola.entities.Turma;
 
 import java.sql.PreparedStatement;
@@ -61,6 +62,32 @@ public class TurmaRepository {
             }
 
             return turma;
+
+        }catch (SQLException exception){
+            throw new RuntimeException(exception);
+        }
+    }
+    public List<Turma> getByAluno(Aluno aluno){
+
+        List<Turma> lista = new ArrayList<>();
+        String sql = "call pr_aluno_turma(?);";
+
+        try {
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setLong(1, aluno.getMatricula());
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+
+                Turma turma = new Turma();
+                turma.setId(Long.valueOf(result.getInt("id")));
+                turma.setDisciplina(result.getString("disciplina"));
+                turma.setSerie(result.getString("serie"));
+
+                lista.add(turma);
+            }
+
+            return lista;
 
         }catch (SQLException exception){
             throw new RuntimeException(exception);

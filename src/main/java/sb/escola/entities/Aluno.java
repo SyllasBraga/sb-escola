@@ -30,7 +30,7 @@ public class Aluno extends Pessoa{
                 ", nomeCompleto='" + nomeCompleto + '\'' +
                 ", dataMatricula=" + dataMatricula +
                 ", endereco='" + endereco + '\'' +
-                "turmas=" + turmas +
+                "turmas=" + turmas.toString() +
                 '}';
     }
 }

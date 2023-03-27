@@ -53,3 +53,15 @@ insert into turma values (default, "1º Ensino Médio", "Matemática I", 1),
 (default, "1º Ensino Médio", "Banco de Dados I", 2);
 
 insert into aluno_turma values (1, 1), (1, 2),(1, 3),(1, 4), (2, 1), (2, 2),(3, 1), (3, 2),(3, 3),(3, 4), (4, 1), (4, 2),(4, 3),(4, 4);
+
+DELIMITER $$
+CREATE PROCEDURE pr_aluno_turma (id_aluno int)
+BEGIN
+	select t.* from turma t 
+	inner join aluno_turma atu on atu.id_turma = t.id
+	inner join aluno a on a.id = atu.id_aluno
+    where a.id=id_aluno;
+END $$
+DELIMITER ;
+
+call pr_aluno_turma(2);
