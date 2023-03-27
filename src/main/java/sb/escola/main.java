@@ -14,5 +14,8 @@ public class main {
 
         AlunoRepository alunoRepository = new AlunoRepository();
 
+        for (Aluno aluno : alunoRepository.getAll()){
+            System.out.println(aluno);
+        }
     }
 }
