@@ -1,9 +1,10 @@
 package sb.escola.repositories;
 
-import sb.escola.Configs.DataBaseConfig;
+import sb.escola.configs.DataBaseConfig;
 import sb.escola.entities.Aluno;
 import sb.escola.entities.Turma;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,6 +45,49 @@ public class AlunoRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Aluno getById(Long id){
+
+        String sql = "select * from aluno where id=?";
+        Aluno aluno = new Aluno();
+
+        try {
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setLong(1, id);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()){
+                aluno.setMatricula(Long.valueOf(rs.getInt("id")));
+                aluno.setNomeCompleto(rs.getString("nome_completo"));
+                aluno.setEndereco(rs.getString("endereco"));
+                aluno.setDataMatricula(rs.getDate("data_matricula"));
+                aluno.setTurma(getTurmasAluno(aluno));
+            }
+
+            return aluno;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public boolean create(Aluno aluno){
+
+        String sql = "insert into aluno values(default, ?, ?, ?)";
+
+        try {
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setString(1, aluno.getNomeCompleto());
+            statement.setDate(2, new Date(aluno.getDataMatricula().getTime()));
+            statement.setString(3, aluno.getEndereco());
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public List<Turma> getTurmasAluno(Aluno aluno) {

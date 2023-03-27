@@ -1,6 +1,6 @@
 package sb.escola.repositories;
 
-import sb.escola.Configs.DataBaseConfig;
+import sb.escola.configs.DataBaseConfig;
 import sb.escola.entities.Aluno;
 import sb.escola.entities.Turma;
 

@@ -1,4 +1,4 @@
-package sb.escola.Configs;
+package sb.escola.configs;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
