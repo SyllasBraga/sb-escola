@@ -109,6 +109,22 @@ public class AlunoRepository {
 
     }
 
+    public boolean delete(Aluno aluno){
+
+        String sql = "delete from aluno where id=?";
+
+        try {
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setInt(1, aluno.getMatricula().intValue());
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public List<Turma> getTurmasAluno(Aluno aluno) {
         return turmaRepository.getByAluno(aluno);
     }

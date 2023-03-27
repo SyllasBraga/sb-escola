@@ -14,6 +14,6 @@ public class main {
         AlunoRepository alunoRepository = new AlunoRepository();
         Aluno aluno = new Aluno(5L, "André", new StringParaDate().converter("2006-03-24"), "GV", null);
 
-        System.out.println(alunoRepository.update(aluno));
+        System.out.println(alunoRepository.delete(aluno));
     }
 }
