@@ -12,8 +12,8 @@ public class main {
     public static void main(String[] args) throws ParseException {
 
         AlunoRepository alunoRepository = new AlunoRepository();
-        Aluno aluno = new Aluno(null, "Carlos", new StringParaDate().converter("2010-01-10"), "Peçanha", null);
+        Aluno aluno = new Aluno(5L, "André", new StringParaDate().converter("2006-03-24"), "GV", null);
 
-        System.out.println(alunoRepository.create(aluno));
+        System.out.println(alunoRepository.update(aluno));
     }
 }

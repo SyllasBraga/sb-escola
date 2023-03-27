@@ -63,5 +63,3 @@ BEGIN
     where a.id=id_aluno;
 END $$
 DELIMITER ;
-
-call pr_aluno_turma(2);

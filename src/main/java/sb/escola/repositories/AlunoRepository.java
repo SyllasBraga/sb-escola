@@ -90,6 +90,25 @@ public class AlunoRepository {
 
     }
 
+    public boolean update(Aluno aluno){
+
+        String sql = "update aluno set nome_completo=?, data_matricula=?, endereco=? where id=?";
+
+        try {
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setString(1, aluno.getNomeCompleto());
+            statement.setDate(2, new Date(aluno.getDataMatricula().getTime()));
+            statement.setString(3, aluno.getEndereco());
+            statement.setInt(4, aluno.getMatricula().intValue());
+
+            return statement.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public List<Turma> getTurmasAluno(Aluno aluno) {
         return turmaRepository.getByAluno(aluno);
     }
