@@ -1,5 +1,6 @@
 package sb.escola.entities;
 
+import java.util.List;
 import java.util.Map;
 
 public class Turma {
@@ -7,10 +8,10 @@ public class Turma {
     private Long id;
     private String serie;
     private String disciplina;
-    private Map<Long, Aluno> alunos;
+    private List<Aluno> alunos;
     private Professor professor;
 
-    public Turma(Long id, String serie, String disciplina, Map<Long, Aluno> alunos, Professor professor) {
+    public Turma(Long id, String serie, String disciplina, List<Aluno> alunos, Professor professor) {
         this.id = id;
         this.serie = serie;
         this.disciplina = disciplina;
@@ -45,11 +46,11 @@ public class Turma {
         this.disciplina = disciplina;
     }
 
-    public Map<Long, Aluno> getAlunos() {
+    public List<Aluno> getAlunos() {
         return alunos;
     }
 
-    public void setAlunos(Map<Long, Aluno> alunos) {
+    public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
     }
 
@@ -59,5 +60,16 @@ public class Turma {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    @Override
+    public String toString() {
+        return "Turma{" +
+                "id=" + id +
+                ", serie='" + serie + '\'' +
+                ", disciplina='" + disciplina + '\'' +
+                ", alunos=" + alunos +
+                ", professor=" + professor +
+                '}';
     }
 }
