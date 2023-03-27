@@ -1,7 +1,9 @@
 package sb.escola;
 
 import sb.escola.Configs.DataBaseConfig;
+import sb.escola.entities.Aluno;
 import sb.escola.entities.Turma;
+import sb.escola.repositories.AlunoRepository;
 import sb.escola.repositories.TurmaRepository;
 
 import java.sql.Connection;
@@ -10,13 +12,11 @@ public class main {
 
     public static void main(String[] args){
 
-        TurmaRepository obj = new TurmaRepository();
-        Turma turma = new Turma(6L,"9º ano", "Cálculo III", null, null);
-        for (Turma t : obj.getAll()){
-            System.out.println(t.toString());
+        AlunoRepository alunoRepository = new AlunoRepository();
+
+        for (Aluno aluno : alunoRepository.getAll()){
+            System.out.println(aluno.toString());
         }
 
-        System.out.println(obj.getById(3L));
-        System.out.println(obj.delete(turma));
     }
 }

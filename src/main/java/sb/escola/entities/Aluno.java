@@ -22,4 +22,15 @@ public class Aluno extends Pessoa{
     public void setTurma(List<Turma> turma) {
         this.turmas = turma;
     }
+
+    @Override
+    public String toString() {
+        return "Aluno{"+
+                "matricula=" + matricula +
+                ", nomeCompleto='" + nomeCompleto + '\'' +
+                ", dataMatricula=" + dataMatricula +
+                ", endereco='" + endereco + '\'' +
+                "turmas=" + turmas +
+                '}';
+    }
 }

@@ -5,7 +5,7 @@ use sb_escola;
 create table aluno(
 id int primary key not null auto_increment,
 nome_completo varchar(255) not null,
-dataMatricula date not null,
+data_matricula date not null,
 endereco varchar(255) not null
 );
 

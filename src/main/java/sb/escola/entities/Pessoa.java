@@ -4,10 +4,10 @@ import java.util.Date;
 
 public abstract class Pessoa {
 
-    private Long matricula;
-    private String nomeCompleto;
-    private Date dataMatricula;
-    private String endereco;
+    protected Long matricula;
+    protected String nomeCompleto;
+    protected Date dataMatricula;
+    protected String endereco;
 
     public Pessoa(Long matricula, String nomeCompleto, Date dataMatricula, String endereco) {
         this.matricula = matricula;
@@ -49,5 +49,15 @@ public abstract class Pessoa {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "matricula=" + matricula +
+                ", nomeCompleto='" + nomeCompleto + '\'' +
+                ", dataMatricula=" + dataMatricula +
+                ", endereco='" + endereco + '\'' +
+                '}';
     }
 }
