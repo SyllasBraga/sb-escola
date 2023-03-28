@@ -2,6 +2,7 @@ package sb.escola.repositories;
 
 import sb.escola.configs.DataBaseConfig;
 import sb.escola.entities.Professor;
+import sb.escola.entities.Turma;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -54,6 +55,32 @@ public class ProfessorRepository {
         try{
             PreparedStatement statement = db.connectDatase().prepareStatement(sql);
             statement.setInt(1, id.intValue());
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()){
+
+                professor.setMatricula(rs.getLong("id"));
+                professor.setNomeCompleto(rs.getString("nome_completo"));
+                professor.setGraduacao(rs.getString("graduacao"));
+                professor.setEndereco(rs.getString("endereco"));
+                professor.setSalario(rs.getDouble("salario"));
+                professor.setDataMatricula(rs.getDate("data_matricula"));
+            }
+
+            return professor;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Professor getByTurma(Turma turma){
+
+        String sql = "call pr_professor_turma(?)";
+        Professor professor = new Professor();
+
+        try{
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setInt(1, turma.getProfessor().getMatricula().intValue());
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()){

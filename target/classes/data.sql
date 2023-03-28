@@ -73,3 +73,12 @@ BEGIN
 	where tm.id=id_turma;
 END $$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE pr_professor_turma (id_turma int)
+BEGIN
+	select pf.* from professor pf
+	inner join turma tm on pf.id = tm.id_professor
+	where tm.id = id_turma;
+END $$
+DELIMITER ;

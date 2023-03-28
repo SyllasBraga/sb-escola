@@ -14,11 +14,13 @@ public class main {
 
     public static void main(String[] args) throws ParseException {
 
-        Professor professor = new Professor(4L, "José Maria",
+        Professor professor = new Professor(3L, "José Maria",
                 new StringParaDate().converter("2001-10-10"),
                 "Peçanha", 9999.0, "Sistemas de Informação - EAD");
         ProfessorRepository obj = new ProfessorRepository();
 
-        System.out.println(obj.delete(professor));
+        Turma turma = new Turma(3L, null, null, null, professor);
+
+        System.out.println(obj.getByTurma(turma).toString());
     }
 }
