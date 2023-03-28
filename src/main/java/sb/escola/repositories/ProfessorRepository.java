@@ -88,6 +88,24 @@ public class ProfessorRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-}
+
+    public Boolean update(Professor professor){
+
+        String sql = "update professor set nome_completo=?, data_matricula=?, endereco=?, salario=?," +
+                "graduacao=? where id=?";
+
+        try{
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setString(1, professor.getNomeCompleto());
+            statement.setDate(2, new Date(professor.getDataMatricula().getTime()));
+            statement.setString(3, professor.getEndereco());
+            statement.setDouble(4, professor.getSalario());
+            statement.setString(5, professor.getGraduacao());
+            statement.setInt(6, professor.getMatricula().intValue());
+
+            return statement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }}
