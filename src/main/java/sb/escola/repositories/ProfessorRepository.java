@@ -108,4 +108,19 @@ public class ProfessorRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }}
+    }
+
+    public Boolean delete(Professor professor){
+
+        String sql = "delete from professor where id=?";
+
+        try{
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setInt(1, professor.getMatricula().intValue());
+
+            return statement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

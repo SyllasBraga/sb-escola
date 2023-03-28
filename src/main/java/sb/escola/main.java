@@ -19,6 +19,6 @@ public class main {
                 "Peçanha", 9999.0, "Sistemas de Informação - EAD");
         ProfessorRepository obj = new ProfessorRepository();
 
-        System.out.println(obj.update(professor));
+        System.out.println(obj.delete(professor));
     }
 }
