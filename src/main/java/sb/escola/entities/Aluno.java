@@ -36,6 +36,6 @@ public class Aluno extends Pessoa{
                 ", dataMatricula=" + dataMatricula +
                 ", endereco='" + endereco + '\'' +
                 ", turmas=" + turmasString +
-                '}';
+                '}'+'\n';
     }
 }
