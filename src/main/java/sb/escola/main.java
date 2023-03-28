@@ -14,8 +14,11 @@ public class main {
 
     public static void main(String[] args) throws ParseException {
 
+        Professor professor = new Professor(null, "José",
+                new StringParaDate().converter("2001-10-01"),
+                "Sim", 1999.0, "Sistemas de Informação");
         ProfessorRepository obj = new ProfessorRepository();
 
-        System.out.println(obj.getById(3L).toString());
+        System.out.println(obj.create(professor));
     }
 }

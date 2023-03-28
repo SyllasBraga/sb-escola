@@ -3,6 +3,7 @@ package sb.escola.repositories;
 import sb.escola.configs.DataBaseConfig;
 import sb.escola.entities.Professor;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,6 +67,24 @@ public class ProfessorRepository {
             }
 
             return professor;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Boolean create(Professor professor){
+
+        String sql = "insert into professor values (default,?,?,?,?,?)";
+
+        try{
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setString(1, professor.getNomeCompleto());
+            statement.setDate(2, new Date(professor.getDataMatricula().getTime()));
+            statement.setString(3, professor.getEndereco());
+            statement.setDouble(4, professor.getSalario());
+            statement.setString(5, professor.getGraduacao());
+
+            return statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
