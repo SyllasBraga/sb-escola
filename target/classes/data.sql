@@ -12,7 +12,7 @@ endereco varchar(255) not null
 create table professor(
 id int primary key not null auto_increment,
 nome_completo varchar(255) not null,
-dataMatricula date not null,
+data_matricula date not null,
 endereco varchar(255) not null,
 salario double not null,
 graduacao varchar(255) not null
@@ -73,5 +73,3 @@ BEGIN
 	where tm.id=id_turma;
 END $$
 DELIMITER ;
-
-call pr_alunos_turma(1)

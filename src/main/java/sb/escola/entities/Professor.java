@@ -32,4 +32,16 @@ public class Professor extends Pessoa{
     public void setGraduacao(String graduacao) {
         this.graduacao = graduacao;
     }
+
+    @Override
+    public String toString() {
+        return "Professor{" +
+                ", matricula=" + matricula +
+                ", nomeCompleto='" + nomeCompleto + '\'' +
+                ", dataMatricula=" + dataMatricula +
+                ", endereco='" + endereco + '\'' +
+                "salario=" + salario +
+                ", graduacao='" + graduacao + '\'' +
+                '}';
+    }
 }
