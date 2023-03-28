@@ -13,9 +13,11 @@ import java.util.List;
 public class TurmaRepository {
 
     public DataBaseConfig db;
+    public TurmaRepository turmaRepository;
 
     public TurmaRepository(){
         this.db = new DataBaseConfig();
+        this.turmaRepository = new TurmaRepository();
     }
 
     public List<Turma> getAll(){
@@ -33,6 +35,7 @@ public class TurmaRepository {
                 turma.setId(Long.valueOf(result.getInt("id")));
                 turma.setDisciplina(result.getString("disciplina"));
                 turma.setSerie(result.getString("serie"));
+                turma.setAlunos(getAlunosTurma(turma));
 
                 lista.add(turma);
             }
@@ -59,6 +62,8 @@ public class TurmaRepository {
                 turma.setId(Long.valueOf(result.getInt("id")));
                 turma.setDisciplina(result.getString("disciplina"));
                 turma.setSerie(result.getString("serie"));
+                turma.setAlunos(getAlunosTurma(turma));
+
             }
 
             return turma;
@@ -140,5 +145,9 @@ public class TurmaRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Aluno> getAlunosTurma(Turma turma){
+        return turmaRepository.getAlunosTurma(turma);
     }
 }
