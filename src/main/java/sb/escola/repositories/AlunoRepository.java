@@ -72,6 +72,33 @@ public class AlunoRepository {
 
     }
 
+    public List<Aluno> getByTurma(Turma turma){
+
+        List<Aluno> lista = new ArrayList<>();
+        String sql = "call pr_alunos_turma(?)";
+
+        try {
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setInt(1, turma.getId().intValue());
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Aluno aluno = new Aluno();
+                aluno.setMatricula(Long.valueOf(rs.getInt("id")));
+                aluno.setNomeCompleto(rs.getString("nome_completo"));
+                aluno.setEndereco(rs.getString("endereco"));
+                aluno.setDataMatricula(rs.getDate("data_matricula"));
+                aluno.setTurma(getTurmasAluno(aluno));
+                lista.add(aluno);
+            }
+
+            return lista;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean create(Aluno aluno){
 
         String sql = "insert into aluno values(default, ?, ?, ?)";

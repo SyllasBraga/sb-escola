@@ -63,3 +63,15 @@ BEGIN
     where a.id=id_aluno;
 END $$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE pr_alunos_turma (id_turma int)
+BEGIN
+	select al.* from aluno al
+	inner join aluno_turma atu on al.id = atu.id_aluno
+	inner join turma tm on atu.id_turma = tm.id
+	where tm.id=id_turma;
+END $$
+DELIMITER ;
+
+call pr_alunos_turma(1)
