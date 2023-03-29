@@ -2,6 +2,7 @@ package sb.escola.repositories;
 
 import sb.escola.configs.DataBaseConfig;
 import sb.escola.entities.Aluno;
+import sb.escola.entities.Professor;
 import sb.escola.entities.Turma;
 
 import java.sql.PreparedStatement;
@@ -13,11 +14,13 @@ import java.util.List;
 public class TurmaRepository {
 
     public DataBaseConfig db;
-    public TurmaRepository turmaRepository;
+    public ProfessorRepository professorRepository;
+    public AlunoRepository alunoRepository;
 
     public TurmaRepository(){
         this.db = new DataBaseConfig();
-        this.turmaRepository = new TurmaRepository();
+        this.professorRepository = new ProfessorRepository();
+        this.alunoRepository = new AlunoRepository();
     }
 
     public List<Turma> getAll(){
@@ -36,6 +39,7 @@ public class TurmaRepository {
                 turma.setDisciplina(result.getString("disciplina"));
                 turma.setSerie(result.getString("serie"));
                 turma.setAlunos(getAlunosTurma(turma));
+                turma.setProfessor(getProfessor(turma));
 
                 lista.add(turma);
             }
@@ -63,6 +67,7 @@ public class TurmaRepository {
                 turma.setDisciplina(result.getString("disciplina"));
                 turma.setSerie(result.getString("serie"));
                 turma.setAlunos(getAlunosTurma(turma));
+                turma.setProfessor(getProfessor(turma));
 
             }
 
@@ -88,6 +93,7 @@ public class TurmaRepository {
                 turma.setId(Long.valueOf(result.getInt("id")));
                 turma.setDisciplina(result.getString("disciplina"));
                 turma.setSerie(result.getString("serie"));
+                turma.setProfessor(getProfessor(turma));
 
                 lista.add(turma);
             }
@@ -148,6 +154,10 @@ public class TurmaRepository {
     }
 
     public List<Aluno> getAlunosTurma(Turma turma){
-        return turmaRepository.getAlunosTurma(turma);
+        return alunoRepository.getByTurma(turma);
+    }
+
+    public Professor getProfessor(Turma turma){
+        return professorRepository.getByTurma(turma);
     }
 }
