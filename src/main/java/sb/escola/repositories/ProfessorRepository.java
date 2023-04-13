@@ -15,8 +15,8 @@ public class ProfessorRepository {
 
     private DataBaseConfig db;
 
-    public ProfessorRepository(){
-        this.db = new DataBaseConfig();
+    public ProfessorRepository(DataBaseConfig db) {
+        this.db = db;
     }
 
     public List<Professor> getAll(){

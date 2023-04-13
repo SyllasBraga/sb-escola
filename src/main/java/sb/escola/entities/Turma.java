@@ -1,5 +1,6 @@
 package sb.escola.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,12 +65,16 @@ public class Turma {
 
     @Override
     public String toString() {
+
+        List<String> listaNomesAlunos = new ArrayList<>();
+        alunos.forEach(x -> listaNomesAlunos.add(x.getNomeCompleto()));
+
         return "Turma{" +
                 "id=" + id +
                 ", serie='" + serie + '\'' +
                 ", disciplina='" + disciplina + '\'' +
-                ", alunos=" + alunos +
-                ", professor=" + professor +
+                ", alunos=" +  listaNomesAlunos+
+                ", professor=" + professor.getNomeCompleto() +
                 '}';
     }
 }

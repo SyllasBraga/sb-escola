@@ -14,11 +14,9 @@ import java.util.List;
 public class AlunoRepository {
 
     private DataBaseConfig db;
-    private TurmaRepository turmaRepository;
 
-    public AlunoRepository() {
-        this.db = new DataBaseConfig();
-        this.turmaRepository = new TurmaRepository();
+    public AlunoRepository(DataBaseConfig db) {
+        this.db = db;
     }
 
     public List<Aluno> getAll() {
@@ -36,7 +34,7 @@ public class AlunoRepository {
                 aluno.setNomeCompleto(rs.getString("nome_completo"));
                 aluno.setEndereco(rs.getString("endereco"));
                 aluno.setDataMatricula(rs.getDate("data_matricula"));
-                aluno.setTurma(getTurmasAluno(aluno));
+                aluno.setTurma(getTurmaAluno(aluno));
                 lista.add(aluno);
             }
 
@@ -62,7 +60,7 @@ public class AlunoRepository {
                 aluno.setNomeCompleto(rs.getString("nome_completo"));
                 aluno.setEndereco(rs.getString("endereco"));
                 aluno.setDataMatricula(rs.getDate("data_matricula"));
-                aluno.setTurma(getTurmasAluno(aluno));
+                aluno.setTurma(getTurmaAluno(aluno));
             }
 
             return aluno;
@@ -70,33 +68,6 @@ public class AlunoRepository {
             throw new RuntimeException(e);
         }
 
-    }
-
-    public List<Aluno> getByTurma(Turma turma){
-
-        List<Aluno> lista = new ArrayList<>();
-        String sql = "call pr_alunos_turma(?)";
-
-        try {
-            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
-            statement.setInt(1, turma.getId().intValue());
-            ResultSet rs = statement.executeQuery();
-
-            while (rs.next()) {
-                Aluno aluno = new Aluno();
-                aluno.setMatricula(Long.valueOf(rs.getInt("id")));
-                aluno.setNomeCompleto(rs.getString("nome_completo"));
-                aluno.setEndereco(rs.getString("endereco"));
-                aluno.setDataMatricula(rs.getDate("data_matricula"));
-                aluno.setTurma(getTurmasAluno(aluno));
-                lista.add(aluno);
-            }
-
-            return lista;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public boolean create(Aluno aluno){
@@ -149,10 +120,31 @@ public class AlunoRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
-    public List<Turma> getTurmasAluno(Aluno aluno) {
-        return turmaRepository.getByAluno(aluno);
+    public List<Turma> getTurmaAluno(Aluno aluno){
+
+        List<Turma> lista = new ArrayList<>();
+        String sql = "call pr_aluno_turma(?);";
+
+        try {
+            PreparedStatement statement = db.connectDatase().prepareStatement(sql);
+            statement.setLong(1, aluno.getMatricula());
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+
+                Turma turma = new Turma();
+                turma.setDisciplina(result.getString("disciplina"));
+
+                lista.add(turma);
+            }
+
+            return lista;
+
+        }catch (SQLException exception){
+            throw new RuntimeException(exception);
+        }
     }
+
 }

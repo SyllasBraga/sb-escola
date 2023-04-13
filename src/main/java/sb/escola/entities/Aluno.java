@@ -27,6 +27,7 @@ public class Aluno extends Pessoa{
 
     @Override
     public String toString() {
+
         List<String> turmasString = new ArrayList<>();
         turmas.forEach(x -> turmasString.add(x.getDisciplina()));
 
@@ -35,7 +36,7 @@ public class Aluno extends Pessoa{
                 ", nomeCompleto='" + nomeCompleto + '\'' +
                 ", dataMatricula=" + dataMatricula +
                 ", endereco='" + endereco + '\'' +
-                ", turmas=" + turmasString +
+                ", turmas='" + turmasString + '\'' +
                 '}'+'\n';
     }
 }
